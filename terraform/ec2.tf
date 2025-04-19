@@ -17,7 +17,6 @@ resource "aws_instance" "jenkins" {
     connection {
       type        = "ssh"
       user        = "ec2-user"
-      private_key = file("~/.ssh/id_rsa")
       host        = self.public_ip
     }
   }
