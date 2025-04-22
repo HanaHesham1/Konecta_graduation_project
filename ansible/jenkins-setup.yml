@@ -1,0 +1,20 @@
+- name: Setup Jenkins
+  hosts: localhost
+  connection: local
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+    - name: Pull Jenkins Docker image
+      community.docker.docker_image:
+        name: jenkins/jenkins
+        source: pull
+
+    - name: Run Jenkins container
+      community.docker.docker_container:
+        name: jenkins
+        image: jenkins/jenkins
+        state: started
+        ports:
+          - "9090:8080"
+        volumes:
+          - jenkins_home:/var/jenkins_home
